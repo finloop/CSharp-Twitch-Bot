@@ -1,6 +1,6 @@
 # CSharp-Twitch-Bot
 ## Getting Started
-To run a but you need to create a **config file**. It uses a json to store settings, that are applied when the application starts. Here's the example one below.
+To run a bot you need to create a **config file**. It uses a json to store settings, that are applied when the application starts. Here's the example one below.
 
 ```json
 {
