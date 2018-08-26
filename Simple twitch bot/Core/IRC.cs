@@ -18,6 +18,12 @@ namespace Simple_twitch_bot.Core
         private StreamReader reader;
         private StreamWriter writer;
 
+        ///<summary>Twitch IRC (chat) client.</summary>
+        ///<para name="_channels">List of channels to join</para>
+        ///<para name="_botName">Bot's username</para>
+        ///<para name="_oauth">Your oauth Twitch token</para>
+        ///<para name="_port">Port</para>
+        ///<para name="_ip">Ip adress</para>
         public IRC(List<String> _channels, string _botName, string _oauth, int _port, string _ip)
         {
             channels = _channels;
@@ -27,6 +33,7 @@ namespace Simple_twitch_bot.Core
             ip = _ip;
         }
 
+        ///<summary>Twitch IRC (chat) client.</summary>
         public IRC(FileIO.ConfigParameters parameters)
         {
             channels = parameters.channels;
@@ -35,7 +42,6 @@ namespace Simple_twitch_bot.Core
             port = parameters.port;
             ip = parameters.ip;
         }
-
         private void Connect()
         {
             try
@@ -53,6 +59,7 @@ namespace Simple_twitch_bot.Core
                     writer.WriteLine("JOIN #" + channels[i]);
                 }
 
+                // JOIN WHISPERS CHANNEL
                 writer.WriteLine("CAP REQ :twitch.tv/commands");
 
                 writer.Flush();
@@ -63,6 +70,8 @@ namespace Simple_twitch_bot.Core
             }
         }
 
+        ///<summary>Use this to join channel.</summary>
+        ///<para name="channel">The name of channel you want to join</para>
         public void ConnectTo(string channel)
         {
             if(tcpClient.Connected)
@@ -72,6 +81,8 @@ namespace Simple_twitch_bot.Core
             }
         }
 
+        ///<summary>Sends a raw message to the server.</summary>
+        ///<para name="message">Message you want to send.</para>
         public void SendRawMessage(string message)
         {
             try
@@ -85,6 +96,9 @@ namespace Simple_twitch_bot.Core
             }
         }
 
+        ///<summary>Sends a message to specified channel.</summary>
+        ///<para name="message">Message you want to send.</para>
+        ///<para name="channel">Channel you want to send message to.</para>
         public void SendChatMessage(string channel, string message)
         {
             try
@@ -97,7 +111,9 @@ namespace Simple_twitch_bot.Core
                 Connect();
             }
         }
-
+        ///<summary>Sends a whisper to specified reciever.</summary>
+        ///<para name="message">Message you want to send.</para>
+        ///<para name="reciever">Person/Account you want to send message to.</para>
         public void SendWhisper(string reciever, string message)
         {
             try
@@ -109,7 +125,8 @@ namespace Simple_twitch_bot.Core
                 Connect();
             }
         }
-
+        ///<summary>Reads message from twitch server.</summary>
+        ///<returns>Returns raw message from the server.</returns>
         public string ReadMessage()
         {
             try

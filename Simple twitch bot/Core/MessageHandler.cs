@@ -6,7 +6,7 @@ namespace Simple_twitch_bot.Core
 {
     class MessageHandler
     {
-        static public void HandleMessage(ref IRC irc, string message)
+        static public void HandleMessage(IRC irc, string message)
         {
             Console.WriteLine(message);
 

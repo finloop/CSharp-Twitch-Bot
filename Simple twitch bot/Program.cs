@@ -14,7 +14,7 @@ namespace Simple_twitch_bot
             while(true)
             {
                 // Handle all the messages
-                MessageHandler.HandleMessage(ref irc, irc.ReadMessage()); 
+                MessageHandler.HandleMessage(irc, irc.ReadMessage()); 
                 
             }
         }
